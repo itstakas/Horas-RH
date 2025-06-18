@@ -9,6 +9,8 @@ let premissas = {
     horaExtra1: '02:00'         // Limite para hora extra tipo 1
 };
 
+document.getElementById('overlay').addEventListener('click', fecharConfig); //fecha ao clicar fora da janela
+
 // Abre o modal de configuração
 function abrirConfig() {
     document.getElementById('overlay').style.display = 'block';
@@ -77,7 +79,14 @@ function salvarConfig() {
     premissas.fimNoturno = document.getElementById('fimNoturno').value;
     premissas.horaExtra1 = document.getElementById('horaExtra1').value;
 
+    localStorage.setItem('premissas', JSON.stringify(premissas)) //salva premissas e evite perca no f5
+
     fecharConfig(); // Fecha o modal após salvar
+}
+
+window.onload = () =>{
+    const salvas = localStorage.getItem('premissas');
+    if (salvas) premissas = JSON.parse(salvas)
 }
 
 // Gera a tabela de dias entre 24 do mês anterior e 26 do mês atual
@@ -109,7 +118,18 @@ function gerarTabela() {
             <td><button onclick="toggleFalta(this)">Atribuir Falta</button></td>
         `;
         tbody.appendChild(tr);
+
+        //preenche automaticammente os horarios ao gerar a tabela segundo a premissa
+        const premissa = premissa.dias[(diasSemana === 0) ? 7 : diaSemana];
+        if (premissa){
+            inputs[0].value = premissa.entrada || '';
+            inputs[1].value = premissa.intervalo || '';
+            inputs[2].value = premissa.retorno || '';
+            inputs[3].value = premissa.saida || '';
+
+        }
     }
+
 }
 
 // Ativa/desativa a falta em um dia e bloqueia os inputs
