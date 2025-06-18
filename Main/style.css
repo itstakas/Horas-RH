@@ -1,0 +1,63 @@
+/* Estilos gerais para o corpo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        /* Estilos para a tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        /* Estilo das células da tabela */
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* Cabeçalho da tabela */
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Inputs de hora e texto */
+        input[type="time"],
+        input[type="text"] {
+            width: 70px;
+        }
+
+        /* Estilos para o modal (janela flutuante de configuração) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border: 2px solid #333;
+            z-index: 10;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Fundo escurecido atrás do modal */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        /* Estilo para a linha de totais */
+        .totais {
+            margin-bottom: 10px;
+        }
