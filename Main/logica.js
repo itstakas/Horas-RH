@@ -1,5 +1,11 @@
 const diasSemana = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-let premissas = { dias: {}, inicioNoturno: '22:00', fimNoturno: '05:00', horaExtra1: '02:00' };
+
+let premissas = { 
+    dias: {}, 
+    inicioNoturno: '22:00', 
+    fimNoturno: '05:00', 
+    horaExtra1: '02:00'
+ };
 
 function abrirConfig() {
     document.getElementById('overlay').style.display = 'block';
@@ -15,6 +21,7 @@ function fecharConfig() {
 function gerarConfigDias() {
     const container = document.getElementById('config-dias');
     container.innerHTML = '';
+
     for (let i = 1; i <= 7; i++) {
         const div = document.createElement('div');
         div.innerHTML = `
@@ -25,8 +32,10 @@ function gerarConfigDias() {
             Saída <input type="time" id="saida${i}"><br>
             <small id="total${i}"></small>
         `;
+
         container.appendChild(div);
     }
+    
     document.getElementById('inicioNoturno').value = premissas.inicioNoturno;
     document.getElementById('fimNoturno').value = premissas.fimNoturno;
     document.getElementById('horaExtra1').value = premissas.horaExtra1;
@@ -39,6 +48,7 @@ function salvarConfig() {
         const retorno = document.getElementById(`retorno${i}`).value;
         const saida = document.getElementById(`saida${i}`).value;
         premissas.dias[i] = {entrada, intervalo, retorno, saida};
+
         if (i === 1 && entrada) {
             for (let j = 2; j <= 5; j++) {
                 premissas.dias[j] = {entrada, intervalo, retorno, saida};
@@ -48,9 +58,11 @@ function salvarConfig() {
                 document.getElementById(`saida${j}`).value = saida;
             }
         }
+
         const total = calcularDiferenca(entrada, intervalo) + calcularDiferenca(retorno, saida);
         document.getElementById(`total${i}`).innerText = `Total: ${formatarHoras(total)}`;
     }
+
     premissas.inicioNoturno = document.getElementById('inicioNoturno').value;
     premissas.fimNoturno = document.getElementById('fimNoturno').value;
     premissas.horaExtra1 = document.getElementById('horaExtra1').value;
@@ -61,7 +73,9 @@ function gerarTabela() {
     const tbody = document.getElementById('tabela');
     tbody.innerHTML = '';
     const mesSelecionado = document.getElementById('mesSelecionado').value;
+
     if (!mesSelecionado) return alert('Selecione um mês');
+
     const [ano, mes] = mesSelecionado.split('-').map(Number);
     const inicio = new Date(ano, mes -1, 24);
     const fim = new Date(ano, mes, 26);
@@ -90,6 +104,7 @@ function toggleFalta(btn) {
     const linha = btn.parentElement.parentElement;
     const inputs = linha.querySelectorAll('input');
     const saldo = linha.querySelector('.saldo');
+
     if (btn.classList.contains('faltou')) {
         inputs.forEach(i => i.disabled = false);
         saldo.innerText = '';
@@ -109,6 +124,7 @@ function toggleFalta(btn) {
 function calcular() {
     const linhas = document.querySelectorAll('#tabela tr');
     let totalSaldo = 0, totalHE = 0, totalNoturno = 0, totalAtraso = 0, totalH1 = 0, totalH2 = 0;
+    
     linhas.forEach(linha => {
         const cells = linha.querySelectorAll('td');
         const inputs = linha.querySelectorAll('input');
