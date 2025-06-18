@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     const senhaCorreta = '1234';
 
     if (username === usuarioCorreto && password === senhaCorreta){
-        window.location.href = "sistema-de-horas\index.html" 
+        window.location.href = "../sistema-de-horas/index.html" 
     } else {
         document.getElementById('erro').innerText = "Usuário ou senha incorretos!"
     }
