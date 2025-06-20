@@ -19,7 +19,9 @@ function calcular() {
         cells[10].innerText = formatarHoras(saldo);
         totalSaldo += saldo;
 
-        const diaSemana = diasSemana.indexOf(cells[1].innerText);
+       FAÇSLDUJFHALOISDUFHAOSIDFUHAOFD
+
+
         const premissa = premissas.dias[(diaSemana === 0) ? 7 : diaSemana];
         const jornada = calcularDiferenca(premissa.entrada, premissa.intervalo) + calcularDiferenca(premissa.retorno, premissa.saida);
 
