@@ -84,13 +84,12 @@ function salvarConfig() {
     fecharConfig(); // Fecha o modal após salvar
 }
 
-window.onload = () =>{
-    const salvas = localStorage.getItem('premissas');
-    if (salvas) premissas = JSON.parse(salvas)
-}
-
 // Gera a tabela de dias entre 24 do mês anterior e 26 do mês atual
 function gerarTabela() {
+    if (!Object.keys(premissas.dias).length) {
+    return alert("Configure as premissas antes de gerar a tabela.");
+    }
+
     const tbody = document.getElementById('tabela');
     tbody.innerHTML = '';
     const mesSelecionado = document.getElementById('mesSelecionado').value;
@@ -130,6 +129,10 @@ function gerarTabela() {
         }
     }
 
+}
+window.onload = () =>{
+    const salvas = localStorage.getItem('premissas');
+    if (salvas) premissas = JSON.parse(salvas)
 }
 
 // Ativa/desativa a falta em um dia e bloqueia os inputs
