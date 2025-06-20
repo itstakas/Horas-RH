@@ -10,6 +10,8 @@ let premissas = {
 };
 
 document.getElementById('overlay').addEventListener('click', fecharConfig); //fecha ao clicar fora da janela
+document.getElementById('mesSelecionado').addEventListener('change', gerarTabela) //Ao selecionar um novo mes, gera tabela
+document.getElementById('tabela').addEventListener('change', calcular) //Qualquer modificação nos campos input de tabela, será calculado novamente
 
 // Abre o modal de configuração
 function abrirConfig() {
@@ -147,6 +149,8 @@ function toggleFalta(btn) {
         saldo.innerText = '';
         btn.classList.remove('faltou');
         btn.innerText = 'Atribuir Falta';
+
+        calcular()
     } else {
         // Bloqueia os inputs e aplica falta
         inputs.forEach(i => i.disabled = true);
@@ -156,6 +160,8 @@ function toggleFalta(btn) {
         saldo.innerText = `-${formatarHoras(total)}`;
         btn.classList.add('faltou');
         btn.innerText = 'Remover Falta';
+
+        
     }
 }
 
