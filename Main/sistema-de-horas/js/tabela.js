@@ -12,16 +12,26 @@ function gerarTabela() {
         const tr = document.createElement('tr');
         const diaSemana = d.getDay();
         const dataFormatada = d.toISOString().split('T')[0];
+
+        const premissaDia = premissas.dias[(diaSemana === 0) ? 7 : diaSemana] || {};
+        
         tr.innerHTML = `
             <td>${dataFormatada}</td>
             <td>${diasSemana[diaSemana]}</td>
-            <td><input type="time"></td><td><input type="time"></td>
-            <td><input type="time"></td><td><input type="time"></td>
-            <td><input type="time"></td><td><input type="time"></td>
-            <td><input type="time"></td><td><input type="time"></td>
-            <td class="saldo"></td><td class="he"></td>
-            <td class="noturno"></td><td class="atraso"></td>
-            <td class="h1"></td><td class="h2"></td>
+            <td><input type="time" value="${premissaDia.entrada || ''}"></td>
+            <td><input type="time" value="${premissaDia.intervalo || ''}"></td>
+            <td><input type="time" value="${premissaDia.retorno || ''}"></td>
+            <td><input type="time" value="${premissaDia.saida || ''}"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td><input type="time"></td>
+            <td class="saldo"></td>
+            <td class="he"></td>
+            <td class="noturno"></td>
+            <td class="atraso"></td>
+            <td class="h1"></td>
+            <td class="h2"></td>
             <td><button onclick="toggleFalta(this)">Atribuir Falta</button></td>
         `;
         tbody.appendChild(tr);
