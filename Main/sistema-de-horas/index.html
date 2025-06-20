@@ -1,76 +1,53 @@
 <!DOCTYPE html>
-<!-- Define o tipo de documento como HTML5 -->
 <html lang="pt-br">
-<!-- Define o idioma como português do Brasil -->
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controle de Jornada de Trabalho</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
     <h1>Controle de Jornada de Trabalho</h1>
-    <!-- Campo para selecionar o mês -->
     <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
+    <button id="btnGerar">Gerar Tabela</button>
+    <button id="btnPremissas">Premissas</button>
+    <button id="btnCalcular">Calcular</button>
 
-    <!-- Botões para gerar tabela, abrir configuração e calcular horas -->
-    <button onclick="gerarTabela()">Gerar Tabela</button>
-    <button onclick="abrirConfig()">Premissas</button>
-    <button onclick="calcular()">Calcular</button>
-
-    <!-- Área que mostrará os totais após o cálculo -->
     <div class="totais" id="totais"></div>
 
-    <!-- Tabela principal com cabeçalho e corpo dinâmico -->
     <table>
         <thead>
             <tr>
-                <th>Data</th>
-                <th>Dia</th>
+                <th>Data</th><th>Dia</th>
                 <th colspan="4">Jornada Normal</th>
-                <!-- Entrada, Intervalo, Retorno, Saída -->
                 <th colspan="4">Sobreaviso</th>
-                <!-- Entrada, Intervalo, Retorno, Saída -->
-                <th>Saldo</th>
-                <th>Horas Extras</th>
-                <th>Adic. Noturno</th>
-                <th>Atrasos</th>
-                <th>HE 1ª Faixa</th>
-                <th>HE 2ª Faixa</th>
+                <th>Saldo</th><th>Horas Extras</th>
+                <th>Adic. Noturno</th><th>Atrasos</th>
+                <th>HE 1ª Faixa</th><th>HE 2ª Faixa</th>
                 <th>Ações</th>
-                <!-- Ex: atribuir falta -->
             </tr>
         </thead>
         <tbody id="tabela"></tbody>
-        <!-- O conteúdo da tabela será gerado via JavaScript -->
     </table>
 
-    <!-- Fundo escuro que aparece quando o modal está aberto -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Janela de configuração de premissas -->
     <div class="modal" id="modal-config">
         <h3>Configuração de Premissas</h3>
-
-        <!-- Campos de entrada por dia da semana (gerado dinamicamente) -->
         <div id="config-dias" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;"></div>
-
-        <!-- Campos para configurar horários padrão -->
         <div>
             <label>Início Noturno <input type="time" id="inicioNoturno"></label>
             <label>Fim Noturno <input type="time" id="fimNoturno"></label>
             <label>Hora Extra 1ª Faixa <input type="time" id="horaExtra1"></label>
         </div>
-
-        <!-- Botões para salvar ou fechar a configuração -->
-        <button onclick="salvarConfig()">Salvar</button>
-        <button onclick="fecharConfig()">Fechar</button>
+        <button id="btnSalvarConfig">Salvar</button>
+        <button id="btnFecharConfig">Fechar</button>
     </div>
 
-    <!-- Inclusão do script JavaScript que contém toda a lógica da aplicação -->
-    <script src="logica.js"></script>
+    <!-- Ordem correta dos scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/calculos.js"></script>
+    <script src="js/tabela.js"></script>
+    <script src="js/main.js"></script>
 </body>
-
 </html>
