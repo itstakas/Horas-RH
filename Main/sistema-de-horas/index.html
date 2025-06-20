@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controle de Jornada de Trabalho</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ccc; padding: 5px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        input[type="time"], input[type="text"] { width: 70px; }
-        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 2px solid #333; z-index: 10; max-height: 90vh; overflow-y: auto; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 5; }
-        .totais { margin-bottom: 10px; }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <h1>Controle de Jornada de Trabalho</h1>
     <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
-    <button onclick="gerarTabela()">Gerar Tabela</button>
-    <button onclick="abrirConfig()">Premissas</button>
-    <button onclick="calcular()">Calcular</button>
+    <button id="btnGerar">Gerar Tabela</button>
+    <button id="btnPremissas">Premissas</button>
+    <button id="btnCalcular">Calcular</button>
 
     <div class="totais" id="totais"></div>
 
@@ -49,10 +40,14 @@
             <label>Fim Noturno <input type="time" id="fimNoturno"></label>
             <label>Hora Extra 1ª Faixa <input type="time" id="horaExtra1"></label>
         </div>
-        <button onclick="salvarConfig()">Salvar</button>
-        <button onclick="fecharConfig()">Fechar</button>
+        <button id="btnSalvarConfig">Salvar</button>
+        <button id="btnFecharConfig">Fechar</button>
     </div>
 
-    <script src="logica.js"></script>
+    <!-- Ordem correta dos scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/calculos.js"></script>
+    <script src="js/tabela.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
