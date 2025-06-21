@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controle de Jornada de Trabalho</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <h1>Controle de Jornada de Trabalho</h1>
     <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
@@ -18,13 +20,17 @@
     <table>
         <thead>
             <tr>
-                <th>Data</th><th>Dia</th>
+                <th>Data</th>
+                <th>Dia</th>
                 <th colspan="4">Jornada Normal</th>
                 <th colspan="4">Sobreaviso</th>
-                <th>Saldo</th><th>Horas Extras</th>
-                <th>Adic. Noturno</th><th>Atrasos</th>
-                <th>HE 1ª Faixa</th><th>HE 2ª Faixa</th>
-                <th>Ações</th>
+                <th>Saldo</th>
+                <th>Horas Extras</th>
+                <th>Adic. Noturno</th>
+                <th>Atrasos</th>
+                <th>HE 1ª Faixa</th>
+                <th>HE 2ª Faixa</th>
+                <th colspan="100%">Ações</th>
             </tr>
         </thead>
         <tbody id="tabela"></tbody>
@@ -50,4 +56,5 @@
     <script src="js/tabela.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
