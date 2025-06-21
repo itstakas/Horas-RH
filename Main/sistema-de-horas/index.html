@@ -10,6 +10,14 @@
 
 <body>
     <h1>Controle de Jornada de Trabalho</h1>
+
+    <div id="areaFiltro">
+        <input type="text" id="pesquisaNome" placeholder="Digite o nome do funcionário" oninput="filtrarFuncionarios()" onblur="fecharBusca()">
+        <button onclick="abrirFiltro()">Filtros</button>
+
+        <ul id="listaResultados"></ul>
+    </div>
+    <br>
     <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
     <button id="btnGerar">Gerar Tabela</button>
     <button id="btnPremissas">Premissas</button>
@@ -50,11 +58,22 @@
         <button id="btnFecharConfig">Fechar</button>
     </div>
 
+    <div class="modal" id="modal-filtro">
+        <h3>Filtrar por setor</h3>
+        <label><input type="checkbox" value="RH" onchange="filtrarFuncionarios()"> RH</label>
+        <label><input type="checkbox" value="TI" onchange="filtrarFuncionarios()"> TI</label>
+        <label><input type="checkbox" value="Produção" onchange="filtrarFuncionarios()"> Produção</label>
+
+        <button id="fecharfiltro" onclick="fecharFiltro()">Fechar</button>
+    </div>
+
     <!-- Ordem correta dos scripts -->
     <script src="js/config.js"></script>
     <script src="js/calculos.js"></script>
     <script src="js/tabela.js"></script>
+    <script src="js/filtro.js"></script><!-- Adicionado script de filtro não tenho certeza da ordem -->
     <script src="js/main.js"></script>
+
 </body>
 
 </html>

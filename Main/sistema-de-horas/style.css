@@ -25,8 +25,8 @@ th {
 }
 
 /* Inputs de hora e texto */
-input[type="time"],
-input[type="text"] {
+#tabela input[type="time"],
+#tabela input[type="text"] {
     width: 70px;
 }
 
@@ -60,4 +60,17 @@ input[type="text"] {
 /* Estilo para a linha de totais */
 .totais {
     margin-bottom: 10px;
+}
+
+/* Estilo das opções de pesquisa */
+#areaFiltro {
+    position: relative;
+}
+
+#listaResultados {
+    position: absolute;
+    top: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
 }
