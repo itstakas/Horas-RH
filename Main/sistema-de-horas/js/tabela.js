@@ -42,27 +42,30 @@ function gerarTabela() {
 }
 
 function toggleFalta(btn) {
-    const linha = btn.parentElement.parentElement; // 'linha' é o nosso <tr>
+    const linha = btn.parentElement.parentElement;
     const inputs = linha.querySelectorAll('input');
-    const saldo = linha.querySelector('.cell-saldo'); // Corrigido para a nova classe
+    const saldo = linha.querySelector('.cell-saldo');
+
+    const perfilAtivo = dadosSistema.perfis[dadosSistema.perfilAtivoId];
+    if (!perfilAtivo) {
+        alert("Nenhum perfil de premissa ativo. Configure um no gerenciador.");
+        return;
+    }
 
     if (btn.classList.contains('faltou')) {
-        // --- Ação de REMOVER a falta ---
         inputs.forEach(i => i.disabled = false);
         saldo.innerText = '';
         btn.classList.remove('faltou');
         btn.innerText = 'Falta';
-        linha.classList.remove('linha-falta'); // ADICIONADO: Remove a classe da linha
-
+        linha.classList.remove('linha-falta');
     } else {
-        // --- Ação de ADICIONAR a falta ---
         inputs.forEach(i => i.disabled = true);
         const diaSemanaText = linha.querySelector('.cell-dia').innerText;
         const diaSemana = diasSemana.indexOf(diaSemanaText);
-        const premissa = premissas.dias[(diaSemana === 0) ? 7 : diaSemana] || {};
+        const premissaDoDia = perfilAtivo.dias[(diaSemana === 0) ? 7 : diaSemana] || {};
         
-        if (premissa.entrada && premissa.saida) {
-            const total = calcularDiferenca(premissa.entrada, premissa.intervalo) + calcularDiferenca(premissa.retorno, premissa.saida);
+        if (premissaDoDia.entrada && premissaDoDia.saida) {
+            const total = calcularDiferenca(premissaDoDia.entrada, premissaDoDia.intervalo) + calcularDiferenca(premissaDoDia.retorno, premissaDoDia.saida);
             saldo.innerText = `-${formatarHoras(total)}`;
         } else {
             saldo.innerText = '-00:00';
@@ -70,6 +73,6 @@ function toggleFalta(btn) {
         
         btn.classList.add('faltou');
         btn.innerText = 'Remover';
-        linha.classList.add('linha-falta'); // ADICIONADO: Adiciona a classe na linha
+        linha.classList.add('linha-falta');
     }
 }

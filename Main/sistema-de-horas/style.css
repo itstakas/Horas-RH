@@ -275,3 +275,34 @@ input[type="time"]:focus {
     gap: 1rem;
     justify-content: flex-end;
 }
+/* Adicione este código ao final de style.css */
+
+/* --- Estilos para o Gerenciador de Perfis --- */
+.profile-manager {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--cor-fundo-sutil);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.profile-manager select, .profile-manager input {
+    flex-grow: 1;
+    border: 1px solid var(--cor-borda);
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.control-group label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cor-texto-suave);
+}

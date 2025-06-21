@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-   <div class="controls">
-        <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
+    <h1>Controle de Jornada de Trabalho</h1>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="mesSelecionado">Selecione o mês:</label>
+            <input type="month" id="mesSelecionado">
+        </div>
+        <div class="control-group">
+            <label for="perfilPremissa">Selecione o Perfil:</label>
+            <select id="perfilPremissa"></select>
+        </div>
         <button id="btnGerar" class="primary">Gerar Tabela</button>
-        <button id="btnPremissas">Premissas</button>
+        <button id="btnPremissas">Gerenciar Premissas</button>
         <button id="btnCalcular">Calcular</button>
     </div>
 
@@ -34,7 +43,14 @@
     <div class="overlay" id="overlay"></div>
 
     <div class="modal" id="modal-config">
-        <h3>Configuração de Premissas</h3>
+        <h3>Gerenciar Perfis de Premissas</h3>
+
+        <div class="profile-manager">
+            <select id="selectPerfilExistente"></select>
+            <input type="text" id="inputNomePerfil" placeholder="Nome do novo perfil">
+            <button id="btnCriarNovo">Criar Novo</button>
+            <button id="btnExcluirPerfil">Excluir Perfil</button>
+        </div>
 
         <div class="tab-nav">
             <button data-tab="tab-seg" class="tab-link active">Segunda</button>
@@ -51,12 +67,11 @@
             </div>
 
         <div class="modal-actions">
-            <button id="btnSalvarConfig" class="primary">Salvar</button>
+            <button id="btnSalvarConfig" class="primary">Salvar Alterações no Perfil</button>
             <button id="btnFecharConfig">Fechar</button>
         </div>
     </div>
 
-    <!-- Ordem correta dos scripts -->
     <script src="js/config.js"></script>
     <script src="js/calculos.js"></script>
     <script src="js/tabela.js"></script>

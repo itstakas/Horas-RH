@@ -1,19 +1,35 @@
-// A "mágica" acontece aqui. O código dentro só roda
-// depois que todo o HTML foi carregado.
 document.addEventListener('DOMContentLoaded', function() {
     
+    carregarDados(); // CARREGA OS PERFIS SALVOS AO INICIAR
+    popularDropdownsDePerfis(); // PREENCHE O DROPDOWN PRINCIPAL
+
     // Conectando os botões às suas funções
     document.getElementById('btnGerar').addEventListener('click', gerarTabela);
     document.getElementById('btnPremissas').addEventListener('click', abrirConfig);
     document.getElementById('btnCalcular').addEventListener('click', calcular);
-    document.getElementById('btnSalvarConfig').addEventListener('click', salvarConfig);
+    
+    // Listeners do Modal
+    document.getElementById('btnSalvarConfig').addEventListener('click', salvarAlteracoesDoPerfil);
     document.getElementById('btnFecharConfig').addEventListener('click', fecharConfig);
-
+    document.getElementById('btnCriarNovo').addEventListener('click', criarNovoPerfil);
+    document.getElementById('btnExcluirPerfil').addEventListener('click', excluirPerfil);
+    document.getElementById('selectPerfilExistente').addEventListener('change', (e) => carregarPerfilParaEdicao(e.target.value));
+    
+    // Atualiza o perfil ativo quando o usuário muda no dropdown principal
+    document.getElementById('perfilPremissa').addEventListener('change', (e) => {
+        dadosSistema.perfilAtivoId = e.target.value;
+        salvarDados();
+    });
 });
 
 
-// As definições das funções ficam fora, pois não dependem do DOM para serem criadas.
 function calcular() {
+    const perfilAtivo = dadosSistema.perfis[dadosSistema.perfilAtivoId];
+    if (!perfilAtivo) {
+        alert("Nenhum perfil de premissa ativo. Selecione um perfil.");
+        return;
+    }
+
     const linhas = document.querySelectorAll('#tabela tr');
     let totalSaldo = 0, totalHE = 0, totalNoturno = 0, totalAtraso = 0, totalH1 = 0, totalH2 = 0;
 
@@ -30,13 +46,13 @@ function calcular() {
 
         const diaSemanaText = linha.querySelector('.cell-dia').innerText;
         const diaSemana = diasSemana.indexOf(diaSemanaText);
-        const premissa = premissas.dias[(diaSemana === 0) ? 7 : diaSemana] || {};
+        const premissaDoDia = perfilAtivo.dias[(diaSemana === 0) ? 7 : diaSemana] || {};
         
-        if (premissa.entrada && premissa.saida) {
-            const jornada = calcularDiferenca(premissa.entrada, premissa.intervalo) + calcularDiferenca(premissa.retorno, premissa.saida);
+        if (premissaDoDia.entrada && premissaDoDia.saida) {
+            const jornada = calcularDiferenca(premissaDoDia.entrada, premissaDoDia.intervalo) + calcularDiferenca(premissaDoDia.retorno, premissaDoDia.saida);
             let atraso = 0;
-            if (inputs[0].value) { atraso += Math.max(0, calcularDiferenca(premissa.entrada, inputs[0].value) - 10/60); }
-            if (inputs[2].value) { atraso += Math.max(0, calcularDiferenca(premissa.retorno, inputs[2].value) - 10/60); }
+            if (inputs[0].value) { atraso += Math.max(0, calcularDiferenca(premissaDoDia.entrada, inputs[0].value) - 10/60); }
+            if (inputs[2].value) { atraso += Math.max(0, calcularDiferenca(premissaDoDia.retorno, inputs[2].value) - 10/60); }
             linha.querySelector('.cell-atraso').innerText = formatarHoras(atraso);
             totalAtraso += atraso;
     
@@ -44,7 +60,7 @@ function calcular() {
             linha.querySelector('.cell-he').innerText = formatarHoras(he);
             totalHE += he;
     
-            const h1Limite = horaParaDecimal(premissas.horaExtra1);
+            const h1Limite = horaParaDecimal(perfilAtivo.horaExtra1);
             const h1 = Math.min(he, h1Limite);
             const h2 = Math.max(0, he - h1Limite);
             linha.querySelector('.cell-h1').innerText = formatarHoras(h1);
@@ -58,7 +74,7 @@ function calcular() {
             linha.querySelector('.cell-h2').innerText = '';
         }
 
-        const noturno = calcularNoturno(inputs[0].value, inputs[3].value) + calcularNoturno(inputs[4].value, inputs[7].value);
+        const noturno = calcularNoturno(inputs[0].value, inputs[3].value, perfilAtivo) + calcularNoturno(inputs[4].value, inputs[7].value, perfilAtivo);
         linha.querySelector('.cell-noturno').innerText = formatarHoras(noturno);
         totalNoturno += noturno;
     });
@@ -66,3 +82,5 @@ function calcular() {
     document.getElementById('totais').innerText =
         `Saldo: ${formatarHoras(totalSaldo)} | HE: ${formatarHoras(totalHE)} | Noturno: ${formatarHoras(totalNoturno)} | Atrasos: ${formatarHoras(totalAtraso)} | HE1: ${formatarHoras(totalH1)} | HE2: ${formatarHoras(totalH2)}`;
 }
+
+// Adapte também a função calcularNoturno em calculos.js para receber o perfil
