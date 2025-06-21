@@ -1,36 +1,137 @@
-/* Estilos gerais para o corpo */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+/* --- RESET E ESTILOS GERAIS --- */
+:root {
+    --cor-primaria: #006b33; /* Verde do tema */
+    --cor-fundo: #ffffff;
+    --cor-fundo-sutil: #f7f7f7;
+    --cor-borda: #ebebeb;
+    --cor-texto: #333333;
+    --cor-texto-suave: #777777;
 }
 
-/* Estilos para a tabela */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 2rem;
+    background-color: var(--cor-fundo-sutil);
+    color: var(--cor-texto);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- CONTROLES SUPERIORES --- */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Espaçamento entre os itens */
+    margin-bottom: 2rem;
+}
+
+.controls label {
+    font-weight: 500;
+}
+
+.controls input[type="month"] {
+    border: 1px solid var(--cor-borda);
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+    border-color: #dcdcdc;
+}
+
+button.primary {
+    background-color: var(--cor-primaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+button.primary:hover {
+    background-color: #005226; /* Verde mais escuro */
+    border-color: #005226;
+}
+
+/* --- ESTILO DA TABELA MINIMALISTA --- */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o border-radius funcione nas bordas da tabela */
 }
 
-/* Estilo das células da tabela */
-th,
-td {
-    border: 1px solid #ccc;
-    padding: 5px;
+th, td {
+    padding: 0.75rem;
     text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--cor-borda);
 }
 
-/* Cabeçalho da tabela */
+tr:last-child td {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
 th {
-    background-color: #f2f2f2;
+    background-color: var(--cor-fundo);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--cor-texto-suave);
 }
 
-/* Inputs de hora e texto */
-input[type="time"],
-input[type="text"] {
-    width: 70px;
+.cell-data {
+    font-weight: 500;
 }
 
-/* Estilos para o modal (janela flutuante de configuração) */
+.cell-dia {
+    color: var(--cor-texto-suave);
+}
+
+/* --- INPUTS DE HORÁRIO INVISÍVEIS --- */
+input[type="time"] {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: center;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent; /* Borda invisível para manter o espaço */
+    transition: border-color 0.2s ease;
+}
+
+input[type="time"]:focus {
+    outline: none;
+    border-bottom: 2px solid var(--cor-primaria); /* Borda verde aparece ao focar */
+}
+
+/* --- BOTÃO DE FALTA SUTIL --- */
+.btn-falta {
+    background: none;
+    border: none;
+    color: var(--cor-texto-suave);
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+.btn-falta:hover {
+    color: #e63946; /* Vermelho para indicar ação de "falta" */
+    background-color: #fef2f2;
+}
+
+/* --- MODAL E OVERLAY --- */
 .modal {
     display: none;
     position: fixed;
@@ -38,14 +139,14 @@ input[type="text"] {
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    padding: 20px;
-    border: 2px solid #333;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     z-index: 10;
     max-height: 90vh;
     overflow-y: auto;
 }
 
-/* Fundo escurecido atrás do modal */
 .overlay {
     display: none;
     position: fixed;
@@ -53,11 +154,45 @@ input[type="text"] {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px); /* Efeito de vidro fosco */
     z-index: 5;
 }
 
-/* Estilo para a linha de totais */
+/* --- TOTAIS --- */
 .totais {
-    margin-bottom: 10px;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--cor-fundo);
+    border-left: 4px solid var(--cor-primaria);
+    font-weight: 500;
+    border-radius: 0 6px 6px 0;
+}
+
+.totais:empty {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Estilo para a linha marcada como falta */
+.linha-falta {
+    background-color: #fef2f2 !important; /* Um vermelho bem claro e suave */
+}
+
+/* Deixa o texto da linha com falta mais suave, para indicar inatividade */
+.linha-falta td,
+.linha-falta .btn-falta {
+    color: #a1a1a1;
+}
+
+/* Mantém a data e o botão com cores normais para clareza */
+.linha-falta .cell-data,
+.linha-falta .btn-falta {
+    color: var(--cor-texto);
+    font-weight: normal;
+}
+
+.linha-falta .btn-falta {
+    color: #e63946; /* Deixa o texto do botão "Remover" vermelho */
 }

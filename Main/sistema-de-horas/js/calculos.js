@@ -1,5 +1,5 @@
 function calcularDiferenca(inicio, fim) {
-    if (!inicio || !fim) return 0;
+    if (!inicio || !fim || inicio === '00:00' || fim === '00:00') return 0;
     const i = horaParaDecimal(inicio);
     const f = horaParaDecimal(fim);
     return f >= i ? f - i : (24 - i + f);
