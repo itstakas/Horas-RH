@@ -12,10 +12,10 @@
     <h1>Controle de Jornada de Trabalho</h1>
 
     <div id="areaFiltro">
-        <input type="text" id="pesquisaNome" placeholder="Digite o nome do funcionário" oninput="filtrarFuncionarios()" onblur="fecharBusca()">
+        <input type="text" id="pesquisaNome" placeholder="Digite o nome do funcionário" oninput="filtrarFuncionarios()" onfocus="filtrarFuncionarios()" onblur="fecharBusca()" ></input>
         <button onclick="abrirFiltro()">Filtros</button>
 
-        <ul id="listaResultados"></ul>
+        <ul id="listaResultados" style="list-style-type: none;"></ul>
     </div>
     <br>
     <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
@@ -45,7 +45,7 @@
     </table>
 
     <div class="overlay" id="overlay"></div>
-
+    <!-- PopUp, configuração premissa -->
     <div class="modal" id="modal-config">
         <h3>Configuração de Premissas</h3>
         <div id="config-dias" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;"></div>
@@ -57,13 +57,15 @@
         <button id="btnSalvarConfig">Salvar</button>
         <button id="btnFecharConfig">Fechar</button>
     </div>
-
+    <!-- PopUp, filtro  -->
     <div class="modal" id="modal-filtro">
         <h3>Filtrar por setor</h3>
-        <label><input type="checkbox" value="RH" onchange="filtrarFuncionarios()"> RH</label>
-        <label><input type="checkbox" value="TI" onchange="filtrarFuncionarios()"> TI</label>
-        <label><input type="checkbox" value="Produção" onchange="filtrarFuncionarios()"> Produção</label>
-
+        <label><input type="checkbox" value="TODOS"  onclick="toggleFiltros(this)" > TODOS</label>
+        <div id="opçõesFiltro">
+            <label><input type="checkbox" value="RH" > RH</label>
+            <label><input type="checkbox" value="TI" > TI</label>
+            <label><input type="checkbox" value="Produção" > Produção</label>
+        </div>
         <button id="fecharfiltro" onclick="fecharFiltro()">Fechar</button>
     </div>
 
@@ -71,7 +73,7 @@
     <script src="js/config.js"></script>
     <script src="js/calculos.js"></script>
     <script src="js/tabela.js"></script>
-    <script src="js/filtro.js"></script><!-- Adicionado script de filtro não tenho certeza da ordem -->
+    <script src="js/filtro.js"></script><!-- Adicionado script de filtro -->
     <script src="js/main.js"></script>
 
 </body>
