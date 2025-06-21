@@ -35,14 +35,25 @@
 
     <div class="modal" id="modal-config">
         <h3>Configuração de Premissas</h3>
-        <div id="config-dias" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;"></div>
-        <div>
-            <label>Início Noturno <input type="time" id="inicioNoturno"></label>
-            <label>Fim Noturno <input type="time" id="fimNoturno"></label>
-            <label>Hora Extra 1ª Faixa <input type="time" id="horaExtra1"></label>
+
+        <div class="tab-nav">
+            <button data-tab="tab-seg" class="tab-link active">Segunda</button>
+            <button data-tab="tab-ter" class="tab-link">Terça</button>
+            <button data-tab="tab-qua" class="tab-link">Quarta</button>
+            <button data-tab="tab-qui" class="tab-link">Quinta</button>
+            <button data-tab="tab-sex" class="tab-link">Sexta</button>
+            <button data-tab="tab-sab" class="tab-link">Sábado</button>
+            <button data-tab="tab-dom" class="tab-link">Domingo</button>
+            <button data-tab="tab-outras" class="tab-link">Outras</button>
         </div>
-        <button id="btnSalvarConfig">Salvar</button>
-        <button id="btnFecharConfig">Fechar</button>
+
+        <div class="tab-content">
+            </div>
+
+        <div class="modal-actions">
+            <button id="btnSalvarConfig" class="primary">Salvar</button>
+            <button id="btnFecharConfig">Fechar</button>
+        </div>
     </div>
 
     <!-- Ordem correta dos scripts -->
