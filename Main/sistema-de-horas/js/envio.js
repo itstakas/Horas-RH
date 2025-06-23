@@ -8,11 +8,12 @@ function criarJson() {
     const diasMes = document.getElementById('tabela').querySelectorAll('tr');
     const premissaSelecionada = 'Tipo 1'//vai ter algo aqui quando tivermos um seletor de premissas
 
-    const dados = {}//depois vai ser alinhado
+    const dados = {}//depois vai ser alinhado para pegar de um bd
 
     let dias = {};
 
-    document.querySelectorAll('#tabela tr').forEach(linha => {
+    //Protótipo de como os dados podem ser  organizados
+    document.querySelectorAll('#tabela tr').forEach(linha => { 
         const data = linha.querySelector('.cell-data').innerText + '/' + ano;
 
         dias[data] = {
@@ -24,7 +25,6 @@ function criarJson() {
             h2: linha.querySelector('.cell-h2').innerText
         };
     });
-
     const dadosColaborador = {
         nome: colaboradorSelecionado,
         premissa: premissaSelecionada,

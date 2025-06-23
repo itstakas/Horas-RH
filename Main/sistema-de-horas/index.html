@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controle de Jornada de Trabalho</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <div id="areaFiltro">
-        <input type="text" id="pesquisaNome" placeholder="Digite o nome do funcionário"></input>
-        <button id="filtroBtn">Filtros</button>
+        <input type="text" id="pesquisaNome" placeholder="Digite o nome do funcionário" Autocomplete="off"></input>
+        <button id="filtroBtn">
+            <div class="icone-wraper"> 
+                <i class="fa-solid fa-filter"></i>
+            </div>
+        </button>
+        
 
         <ul id="listaResultados" style="list-style-type: none;"></ul>
     </div>
@@ -63,12 +69,12 @@
     <!-- PopUp, filtro  -->
     <div class="modal" id="modal-filtro">
         <h3>Filtrar por setor</h3>
-        <label><input type="checkbox" value="TODOS" onclick="toggleFiltros(this)"> TODOS</label>
+        <label><input type="checkbox" value="TODOS" onclick="toggleFiltros(this)" checked="true"> TODOS</label>
 
         <div id="opçõesFiltro">
-            <label><input type="checkbox" value="RH"> RH</label>
-            <label><input type="checkbox" value="TI"> TI</label>
-            <label><input type="checkbox" value="Produção"> Produção</label>
+            <label><input type="checkbox" value="RH" checked="true"> RH</label>
+            <label><input type="checkbox" value="TI" checked="true"> TI</label>
+            <label><input type="checkbox" value="Produção" checked="true"> Produção</label>
 
         </div>
 

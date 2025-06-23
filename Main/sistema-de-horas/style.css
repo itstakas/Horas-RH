@@ -186,8 +186,7 @@ input[type="time"]:focus {
 }
 
 /* Estilo para a linha marcada como falta */
-.linha-falta,
-.linha-atestado {
+.linha-falta {
     background-color: #fef2f2 !important;
     /* Um vermelho bem claro e suave */
 }
@@ -212,29 +211,88 @@ input[type="time"]:focus {
     /* Deixa o texto do botão "Remover" vermelho */
 }
 
+.linha-falta .icone-extra {
+    color:#fff2f2;
+}
+
 /* Estilo das opções de pesquisa */
 
 #areaFiltro {
     position: relative;
+    width: 30%;
+    margin: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
 }
-
 #listaResultados {
     display: none;
     position: absolute;
-    margin-top: 0%;
+    margin-top: -5px;
     padding: 5px;
-    width: 222px;
+    width: 70%;
     top: 100%;
     background: white;
     border: 1px solid #ccc;
     max-height: 200px;
     overflow-y: auto;
-    z-index: 1000;
 }
-
-
-
 #listaResultados li:hover {
     cursor: pointer;
     background: rgb(212, 219, 255);
+}
+
+/*barra de pesquisa*/
+
+#pesquisaNome {
+    width: 70%;
+    font-weight: 700;
+    border: 1px solid var(--cor-borda);
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+/*botão de fiiltros*/
+
+#filtroBtn {
+    width: 20%;
+}
+
+/*Linha marcada com atestado*/
+.linha-atestado {
+    background-color: #f2fef2 !important;
+}
+
+/*Botão atestado*/
+.btn-atestado {
+    border: 0px;
+    color: #a1a1a1;    
+}
+.btn-atestado:hover {
+    color: #80ad75;
+}
+.linha-falta .btn-atestado {
+    background-color: #fef2f2;
+}
+.linha-atestado .btn-atestado {
+    background-color: #f2fef2;
+    color: #80ad75;
+}
+
+.linha-atestado .icone-extra {
+    color: #f2fef2;
+}
+
+/*ICones ficarem um em cima do outro no icone wrapper*/
+.icone-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.icone-wrapper {
+  display: flex;
+  align-items: center;  /* centraliza verticalmente */
+  justify-content: center;  /* centraliza horizontalmente */
+  position: relative; /*para poder haver sobreposição*/
+  width: 40px; 
+  height: 40px;
+  font-size: 16px;
 }

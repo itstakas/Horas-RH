@@ -32,8 +32,18 @@ function gerarTabela() {
             <td class="cell-atraso"></td>
             <td class="cell-h1"></td>
             <td class="cell-h2"></td>
-            <td class="areaBtn"><button class="btn-falta">Atribuir Falta</button></td>
-            <td class="areaBtn"><button class="btn-atestado"> Atestado </button></td>
+            <td class="areaBtn">
+                <button class="btn-falta">
+                    <div class="icone-wrapper"> 
+                        <i class="fa-solid fa-person-circle-question fa-2x"></i>
+                    </div>
+                </button></td>
+            <td class="areaBtn">
+                <button class="btn-atestado">
+                    <div class="icone-wrapper"> 
+                        <i class="fa-solid fa-file fa-2x"></i>
+                    </div>
+                </button></td>
         `;
         tbody.appendChild(tr);
 
@@ -51,6 +61,7 @@ function toggleFalta(btn) {
     const linha = btn.parentElement.parentElement;
     const inputs = linha.querySelectorAll('input');
     const saldo = linha.querySelector('.cell-saldo');
+    const areaIcone = btn.querySelector('.icone-wrapper');
 
     //Checa se o funcionário já está marcado como atestado, caso sim alerta e sai da função
     if (linha.classList.contains('linha-atestado')) {
@@ -63,7 +74,8 @@ function toggleFalta(btn) {
         inputs.forEach(i => i.disabled = false);
         saldo.innerText = '';
 
-        btn.innerText = 'Atribuir Falta';
+        
+        areaIcone.innerHTML = '<i class="fa-solid fa-person-circle-question fa-2x"></i>';
         linha.classList.remove('linha-falta');
 
         calcular()//Calcula quando tira a falta para os valores calculados voltarem a aparecer
@@ -85,8 +97,7 @@ function toggleFalta(btn) {
         const listaCampos = Array.from(linha.querySelectorAll('td')).slice(11, 16); //pega as células 11 à 16 da linha 
         listaCampos.forEach(campo => campo.innerText = '00:00')
 
-        btn.innerText = 'Remover';
-        console.log(linha)
+        areaIcone.innerHTML = '<i class="fa-solid fa-person-circle-question fa-2x"></i><i class="fa-solid fa-xmark fa-2x icone-extra"></i>';
         linha.classList.add('linha-falta'); // ADICIONADO: Adiciona a classe na linha
     }
 
@@ -97,6 +108,7 @@ function toggleFalta(btn) {
 function toggleAtestado(btn) {
     const linha = btn.parentElement.parentElement;
     const inputs = linha.querySelectorAll('input');
+    const areaIcone = btn.querySelector('.icone-wrapper');
 
     //Checa se o funcionário já está marcado como falta, caso sim alerta e sai da função
     if (linha.classList.contains('linha-falta')) {
@@ -113,13 +125,17 @@ function toggleAtestado(btn) {
             elemento.value = '';
             elemento.disabled = false;
         }
+
         linha.classList.remove('linha-atestado');
+        areaIcone.innerHTML = '<i class="fa-solid fa-file fa-2x"></i>';
 
     } else {
         for (let [i, elemento] of inputs.entries()) {//itera o par ordenado de [indíce e elemento] que o entries() gera do nodelist "inputs"
             elemento.value = premissa[i];
             elemento.disabled = true;
         }
+
+        areaIcone.innerHTML = '<i class="fa-solid fa-file fa-2x"></i><i class="fa-solid fa-xmark fa-2x icone-extra"></i>';
         linha.classList.add('linha-atestado');
     }
 
