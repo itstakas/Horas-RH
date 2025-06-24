@@ -3,6 +3,9 @@ document.getElementById('btnPremissas').addEventListener('click', abrirConfig);
 document.getElementById('btnCalcular').addEventListener('click', calcular);
 document.getElementById('btnSalvarConfig').addEventListener('click', salvarConfig);
 document.getElementById('btnFecharConfig').addEventListener('click', fecharConfig);
+//event listeners para automatizar a geração e atualização da tabela
+document.getElementById('mesSelecionado').addEventListener('change', gerarTabela)
+document.getElementById('tabela').addEventListener('input', calcular)
 
 function calcular() {
     const linhas = document.querySelectorAll('#tabela tr');
@@ -24,12 +27,12 @@ function calcular() {
         const jornada = calcularDiferenca(premissa.entrada, premissa.intervalo) + calcularDiferenca(premissa.retorno, premissa.saida);
 
         let atraso = 0;
-        atraso += Math.max(0, calcularDiferenca(premissa.entrada, inputs[0].value) - 10/60);
-        atraso += Math.max(0, calcularDiferenca(premissa.retorno, inputs[2].value) - 10/60);
+        atraso += Math.max(0, calcularDiferenca(premissa.entrada, inputs[0].value) - 10 / 60);
+        atraso += Math.max(0, calcularDiferenca(premissa.retorno, inputs[2].value) - 10 / 60);
         cells[13].innerText = formatarHoras(atraso);
         totalAtraso += atraso;
 
-        const he = Math.max(0, saldo - jornada - 10/60);
+        const he = Math.max(0, saldo - jornada - 10 / 60);
         cells[11].innerText = formatarHoras(he);
         totalHE += he;
 

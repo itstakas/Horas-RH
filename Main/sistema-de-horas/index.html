@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controle de Jornada de Trabalho</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-   <div class="controls">
+    <div id="areaFiltro">
+        <input type="text" id="pesquisaNome" placeholder="Digite o nome do funcionário" Autocomplete="off"></input>
+        <button id="filtroBtn">
+            <div class="icone-wraper"> 
+                <i class="fa-solid fa-filter"></i>
+            </div>
+        </button>
+        
+
+        <ul id="listaResultados" style="list-style-type: none;"></ul>
+    </div>
+
+    <div class="controls">
         <label>Selecione o mês: <input type="month" id="mesSelecionado"></label>
         <button id="btnGerar" class="primary">Gerar Tabela</button>
         <button id="btnPremissas">Premissas</button>
         <button id="btnCalcular">Calcular</button>
+        <button id="btnEnviar">Enviar</button>
     </div>
 
     <div class="totais" id="totais"></div>
@@ -19,13 +35,17 @@
     <table>
         <thead>
             <tr>
-                <th>Data</th><th>Dia</th>
+                <th>Data</th>
+                <th>Dia</th>
                 <th colspan="4">Jornada Normal</th>
                 <th colspan="4">Sobreaviso</th>
-                <th>Saldo</th><th>Horas Extras</th>
-                <th>Adic. Noturno</th><th>Atrasos</th>
-                <th>HE 1ª Faixa</th><th>HE 2ª Faixa</th>
-                <th>Ações</th>
+                <th>Saldo</th>
+                <th>Horas Extras</th>
+                <th>Adic. Noturno</th>
+                <th>Atrasos</th>
+                <th>HE 1ª Faixa</th>
+                <th>HE 2ª Faixa</th>
+                <th colspan="100%">Ações</th>
             </tr>
         </thead>
         <tbody id="tabela"></tbody>
@@ -33,6 +53,7 @@
 
     <div class="overlay" id="overlay"></div>
 
+    <!-- PopUp, configuração premissa -->
     <div class="modal" id="modal-config">
         <h3>Configuração de Premissas</h3>
         <div id="config-dias" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;"></div>
@@ -45,10 +66,28 @@
         <button id="btnFecharConfig">Fechar</button>
     </div>
 
+    <!-- PopUp, filtro  -->
+    <div class="modal" id="modal-filtro">
+        <h3>Filtrar por setor</h3>
+        <label><input type="checkbox" value="TODOS" onclick="toggleFiltros(this)" checked="true"> TODOS</label>
+
+        <div id="opçõesFiltro">
+            <label><input type="checkbox" value="RH" checked="true"> RH</label>
+            <label><input type="checkbox" value="TI" checked="true"> TI</label>
+            <label><input type="checkbox" value="Produção" checked="true"> Produção</label>
+
+        </div>
+
+        <button id="fecharfiltro" onclick="fecharFiltro()">Fechar</button>
+    </div>
+
     <!-- Ordem correta dos scripts -->
     <script src="js/config.js"></script>
     <script src="js/calculos.js"></script>
     <script src="js/tabela.js"></script>
+    <script src="js/filtro.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/envio.js"></script>
 </body>
+
 </html>

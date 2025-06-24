@@ -1,6 +1,7 @@
 /* --- RESET E ESTILOS GERAIS --- */
 :root {
-    --cor-primaria: #006b33; /* Verde do tema */
+    --cor-primaria: #006b33;
+    /* Verde do tema */
     --cor-fundo: #ffffff;
     --cor-fundo-sutil: #f7f7f7;
     --cor-borda: #ebebeb;
@@ -20,7 +21,8 @@ body {
 .controls {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Espaçamento entre os itens */
+    gap: 1rem;
+    /* Espaçamento entre os itens */
     margin-bottom: 2rem;
 }
 
@@ -56,7 +58,8 @@ button.primary {
 }
 
 button.primary:hover {
-    background-color: #005226; /* Verde mais escuro */
+    background-color: #005226;
+    /* Verde mais escuro */
     border-color: #005226;
 }
 
@@ -69,10 +72,12 @@ table {
     background-color: var(--cor-fundo);
     border: 1px solid var(--cor-borda);
     border-radius: 8px;
-    overflow: hidden; /* Garante que o border-radius funcione nas bordas da tabela */
+    overflow: hidden;
+    /* Garante que o border-radius funcione nas bordas da tabela */
 }
 
-th, td {
+th,
+td {
     padding: 0.75rem;
     text-align: center;
     vertical-align: middle;
@@ -80,7 +85,8 @@ th, td {
 }
 
 tr:last-child td {
-    border-bottom: none; /* Remove a borda da última linha */
+    border-bottom: none;
+    /* Remove a borda da última linha */
 }
 
 th {
@@ -108,13 +114,15 @@ input[type="time"] {
     font-size: 1rem;
     text-align: center;
     padding: 0.25rem 0;
-    border-bottom: 2px solid transparent; /* Borda invisível para manter o espaço */
+    border-bottom: 2px solid transparent;
+    /* Borda invisível para manter o espaço */
     transition: border-color 0.2s ease;
 }
 
 input[type="time"]:focus {
     outline: none;
-    border-bottom: 2px solid var(--cor-primaria); /* Borda verde aparece ao focar */
+    border-bottom: 2px solid var(--cor-primaria);
+    /* Borda verde aparece ao focar */
 }
 
 /* --- BOTÃO DE FALTA SUTIL --- */
@@ -127,7 +135,8 @@ input[type="time"]:focus {
 }
 
 .btn-falta:hover {
-    color: #e63946; /* Vermelho para indicar ação de "falta" */
+    color: #e63946;
+    /* Vermelho para indicar ação de "falta" */
     background-color: #fef2f2;
 }
 
@@ -155,7 +164,8 @@ input[type="time"]:focus {
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px); /* Efeito de vidro fosco */
+    backdrop-filter: blur(4px);
+    /* Efeito de vidro fosco */
     z-index: 5;
 }
 
@@ -177,22 +187,112 @@ input[type="time"]:focus {
 
 /* Estilo para a linha marcada como falta */
 .linha-falta {
-    background-color: #fef2f2 !important; /* Um vermelho bem claro e suave */
+    background-color: #fef2f2 !important;
+    /* Um vermelho bem claro e suave */
 }
 
 /* Deixa o texto da linha com falta mais suave, para indicar inatividade */
 .linha-falta td,
+.linha-atestado,
 .linha-falta .btn-falta {
     color: #a1a1a1;
 }
 
 /* Mantém a data e o botão com cores normais para clareza */
 .linha-falta .cell-data,
+.linha-atestado .cell-data,
 .linha-falta .btn-falta {
     color: var(--cor-texto);
     font-weight: normal;
 }
 
 .linha-falta .btn-falta {
-    color: #e63946; /* Deixa o texto do botão "Remover" vermelho */
+    color: #e63946;
+    /* Deixa o texto do botão "Remover" vermelho */
+}
+
+.linha-falta .icone-extra {
+    color:#fff2f2;
+}
+
+/* Estilo das opções de pesquisa */
+
+#areaFiltro {
+    position: relative;
+    width: 30%;
+    margin: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+#listaResultados {
+    display: none;
+    position: absolute;
+    margin-top: -5px;
+    padding: 5px;
+    width: 70%;
+    top: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+#listaResultados li:hover {
+    cursor: pointer;
+    background: rgb(212, 219, 255);
+}
+
+/*barra de pesquisa*/
+
+#pesquisaNome {
+    width: 70%;
+    font-weight: 700;
+    border: 1px solid var(--cor-borda);
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+/*botão de fiiltros*/
+
+#filtroBtn {
+    width: 20%;
+}
+
+/*Linha marcada com atestado*/
+.linha-atestado {
+    background-color: #f2fef2 !important;
+}
+
+/*Botão atestado*/
+.btn-atestado {
+    border: 0px;
+    color: #a1a1a1;    
+}
+.btn-atestado:hover {
+    color: #80ad75;
+}
+.linha-falta .btn-atestado {
+    background-color: #fef2f2;
+}
+.linha-atestado .btn-atestado {
+    background-color: #f2fef2;
+    color: #80ad75;
+}
+
+.linha-atestado .icone-extra {
+    color: #f2fef2;
+}
+
+/*ICones ficarem um em cima do outro no icone wrapper*/
+.icone-wrapper i {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.icone-wrapper {
+  display: flex;
+  align-items: center;  /* centraliza verticalmente */
+  justify-content: center;  /* centraliza horizontalmente */
+  position: relative; /*para poder haver sobreposição*/
+  width: 40px; 
+  height: 40px;
+  font-size: 16px;
 }
